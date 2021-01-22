@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package category;
+
+message Request {
+  string source = 1;
+}
+
+message Response {
+  int32 code = 1;
+  string message = 2;
+  repeated CategoryItem data = 3;
+}
+
+message CategoryItem {
+    int32 id = 1;
+    string name = 2;
+}
+
+service Category {
+  rpc GetList(Request) returns(Response);
+}

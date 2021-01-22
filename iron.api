@@ -1,0 +1,96 @@
+syntax = "v1"
+
+info(
+	title: "运动记录工具"
+	desc: "该系统帮助你记录运动，分析运动"
+	author: "褚魁"
+	email: "18627032049@163.com"
+)
+
+// 注册,登陆
+type (
+	// 注册请求
+	RegisterReq {
+		UserName   string `form:"userName"`   // 用户名
+		Password   string `form:"password"`   // 密码
+		RePassword string `form:"rePassword"` // 重复密码
+	}
+	// 注册响应
+	RegisterResp {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	}
+	// 登陆请求
+	LoginReq {
+		UserName string `form:"userName"` // 用户名
+		Password string `form:"password"` // 密码
+	}
+	// 登陆响应
+	LoginResp {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	}
+)
+
+// 通用
+type (
+	// 响应
+	Resp {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	}
+	// 删除请求
+	DeleteReq {
+		Id int `form:"id"`
+	}
+)
+
+// 类别
+type (
+	AddCategoryReq {
+		CatName     string `form:"catName"`
+		ParentId    int    `form:"parentId"`
+		Description string `form:"description,omitempty"`
+	}
+	AddCategoryResp {
+		Code    int             `json:"code"`
+		Message string          `json:"message"`
+		Data    AddCategoryData `json:"data"`
+	}
+	AddCategoryData {
+		Id int `json:"id"`
+	}
+	ListCategoryReq {
+	}
+	ListCategoryResp {
+		Code    int            `json:"code"`
+		Message string         `json:"message"`
+		Data    []CategoryItem `json:"data"`
+	}
+	CategoryItem {
+		Id   int    `json:"id"`
+		Name string `json:"name"`
+	}
+)
+
+@server(
+	group: user
+)
+service iron-api {
+	@handler Register
+	post /register(RegisterReq) returns(RegisterResp)
+	
+	@handler Login
+	post /login(LoginReq) returns(LoginResp)
+}
+
+@server(
+	group: category
+)
+service iron-api {
+	@handler AddCategory
+	post /category/add(AddCategoryReq) returns(AddCategoryResp)
+	
+	@handler ListCategory
+	get /category/list(ListCategoryReq) returns(ListCategoryResp)
+}
