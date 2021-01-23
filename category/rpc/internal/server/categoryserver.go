@@ -25,3 +25,13 @@ func (s *CategoryServer) GetList(ctx context.Context, in *category.Request) (*ca
 	l := logic.NewGetListLogic(ctx, s.svcCtx)
 	return l.GetList(in)
 }
+
+func (s *CategoryServer) Add(ctx context.Context, in *category.AddReq) (*category.AddResp, error) {
+	l := logic.NewAddLogic(ctx, s.svcCtx)
+	return l.Add(in)
+}
+
+func (s *CategoryServer) Del(ctx context.Context, in *category.DelReq) (*category.DelResp, error) {
+	l := logic.NewDelLogic(ctx, s.svcCtx)
+	return l.Del(in)
+}

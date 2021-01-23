@@ -6,10 +6,10 @@ import (
 	"github.com/tal-tech/go-zero/core/conf"
 	"github.com/tal-tech/go-zero/rest"
 	"github.com/tal-tech/go-zero/rest/httpx"
+	"iron-go/common/library/error"
 	"iron-go/internal/config"
 	"iron-go/internal/handler"
 	"iron-go/internal/svc"
-	"iron-go/library/error"
 )
 
 var configFile = flag.String("f", "etc/iron-api.yaml", "the config file")

@@ -194,6 +194,226 @@ func (x *CategoryItem) GetName() string {
 	return ""
 }
 
+type AddReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Uid         int64  `protobuf:"varint,1,opt,name=uid,proto3" json:"uid,omitempty"`                // 创建人uid
+	CatName     string `protobuf:"bytes,2,opt,name=catName,proto3" json:"catName,omitempty"`         // 种类名称
+	ParentId    int64  `protobuf:"varint,3,opt,name=parentId,proto3" json:"parentId,omitempty"`      // 父类id
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"` // 描述
+}
+
+func (x *AddReq) Reset() {
+	*x = AddReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_category_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddReq) ProtoMessage() {}
+
+func (x *AddReq) ProtoReflect() protoreflect.Message {
+	mi := &file_category_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddReq.ProtoReflect.Descriptor instead.
+func (*AddReq) Descriptor() ([]byte, []int) {
+	return file_category_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AddReq) GetUid() int64 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *AddReq) GetCatName() string {
+	if x != nil {
+		return x.CatName
+	}
+	return ""
+}
+
+func (x *AddReq) GetParentId() int64 {
+	if x != nil {
+		return x.ParentId
+	}
+	return 0
+}
+
+func (x *AddReq) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+type AddResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CatId int64 `protobuf:"varint,1,opt,name=catId,proto3" json:"catId,omitempty"` // 种类id
+}
+
+func (x *AddResp) Reset() {
+	*x = AddResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_category_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddResp) ProtoMessage() {}
+
+func (x *AddResp) ProtoReflect() protoreflect.Message {
+	mi := &file_category_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddResp.ProtoReflect.Descriptor instead.
+func (*AddResp) Descriptor() ([]byte, []int) {
+	return file_category_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AddResp) GetCatId() int64 {
+	if x != nil {
+		return x.CatId
+	}
+	return 0
+}
+
+type DelReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Uid   int64 `protobuf:"varint,1,opt,name=uid,proto3" json:"uid,omitempty"`     // 创建人uid
+	CatId int64 `protobuf:"varint,2,opt,name=catId,proto3" json:"catId,omitempty"` // 类别id
+}
+
+func (x *DelReq) Reset() {
+	*x = DelReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_category_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DelReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DelReq) ProtoMessage() {}
+
+func (x *DelReq) ProtoReflect() protoreflect.Message {
+	mi := &file_category_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DelReq.ProtoReflect.Descriptor instead.
+func (*DelReq) Descriptor() ([]byte, []int) {
+	return file_category_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DelReq) GetUid() int64 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *DelReq) GetCatId() int64 {
+	if x != nil {
+		return x.CatId
+	}
+	return 0
+}
+
+type DelResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Done int32 `protobuf:"varint,1,opt,name=done,proto3" json:"done,omitempty"` // 是否成功, 0:否, 1:是 2:保留
+}
+
+func (x *DelResp) Reset() {
+	*x = DelResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_category_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DelResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DelResp) ProtoMessage() {}
+
+func (x *DelResp) ProtoReflect() protoreflect.Message {
+	mi := &file_category_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DelResp.ProtoReflect.Descriptor instead.
+func (*DelResp) Descriptor() ([]byte, []int) {
+	return file_category_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DelResp) GetDone() int32 {
+	if x != nil {
+		return x.Done
+	}
+	return 0
+}
+
 var File_category_proto protoreflect.FileDescriptor
 
 var file_category_proto_rawDesc = []byte{
@@ -210,11 +430,31 @@ var file_category_proto_rawDesc = []byte{
 	0x61, 0x74, 0x61, 0x22, 0x32, 0x0a, 0x0c, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x49,
 	0x74, 0x65, 0x6d, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52,
 	0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x32, 0x3c, 0x0a, 0x08, 0x43, 0x61, 0x74, 0x65, 0x67,
-	0x6f, 0x72, 0x79, 0x12, 0x30, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x11,
-	0x2e, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x12, 0x2e, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x2e, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x72, 0x0a, 0x06, 0x41, 0x64, 0x64, 0x52, 0x65,
+	0x71, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x03,
+	0x75, 0x69, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x61, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x61, 0x74, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a,
+	0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x08, 0x70, 0x61, 0x72, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73,
+	0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
+	0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x1f, 0x0a, 0x07, 0x41,
+	0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x61, 0x74, 0x49, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x61, 0x74, 0x49, 0x64, 0x22, 0x30, 0x0a, 0x06,
+	0x44, 0x65, 0x6c, 0x52, 0x65, 0x71, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x03, 0x75, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x61, 0x74, 0x49,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x63, 0x61, 0x74, 0x49, 0x64, 0x22, 0x1d,
+	0x0a, 0x07, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x6f, 0x6e,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x64, 0x6f, 0x6e, 0x65, 0x32, 0x94, 0x01,
+	0x0a, 0x08, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x30, 0x0a, 0x07, 0x47, 0x65,
+	0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x11, 0x2e, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
+	0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x63, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2a, 0x0a, 0x03,
+	0x41, 0x64, 0x64, 0x12, 0x10, 0x2e, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x2e, 0x41,
+	0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x11, 0x2e, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79,
+	0x2e, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2a, 0x0a, 0x03, 0x44, 0x65, 0x6c, 0x12,
+	0x10, 0x2e, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x2e, 0x44, 0x65, 0x6c, 0x52, 0x65,
+	0x71, 0x1a, 0x11, 0x2e, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x2e, 0x44, 0x65, 0x6c,
+	0x52, 0x65, 0x73, 0x70, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -229,18 +469,26 @@ func file_category_proto_rawDescGZIP() []byte {
 	return file_category_proto_rawDescData
 }
 
-var file_category_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_category_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_category_proto_goTypes = []interface{}{
 	(*Request)(nil),      // 0: category.Request
 	(*Response)(nil),     // 1: category.Response
 	(*CategoryItem)(nil), // 2: category.CategoryItem
+	(*AddReq)(nil),       // 3: category.AddReq
+	(*AddResp)(nil),      // 4: category.AddResp
+	(*DelReq)(nil),       // 5: category.DelReq
+	(*DelResp)(nil),      // 6: category.DelResp
 }
 var file_category_proto_depIdxs = []int32{
 	2, // 0: category.Response.data:type_name -> category.CategoryItem
 	0, // 1: category.Category.GetList:input_type -> category.Request
-	1, // 2: category.Category.GetList:output_type -> category.Response
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
+	3, // 2: category.Category.Add:input_type -> category.AddReq
+	5, // 3: category.Category.Del:input_type -> category.DelReq
+	1, // 4: category.Category.GetList:output_type -> category.Response
+	4, // 5: category.Category.Add:output_type -> category.AddResp
+	6, // 6: category.Category.Del:output_type -> category.DelResp
+	4, // [4:7] is the sub-list for method output_type
+	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
 	1, // [1:1] is the sub-list for extension extendee
 	0, // [0:1] is the sub-list for field type_name
@@ -288,6 +536,54 @@ func file_category_proto_init() {
 				return nil
 			}
 		}
+		file_category_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_category_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_category_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DelReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_category_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DelResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -295,7 +591,7 @@ func file_category_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_category_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -322,6 +618,8 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CategoryClient interface {
 	GetList(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Add(ctx context.Context, in *AddReq, opts ...grpc.CallOption) (*AddResp, error)
+	Del(ctx context.Context, in *DelReq, opts ...grpc.CallOption) (*DelResp, error)
 }
 
 type categoryClient struct {
@@ -341,9 +639,29 @@ func (c *categoryClient) GetList(ctx context.Context, in *Request, opts ...grpc.
 	return out, nil
 }
 
+func (c *categoryClient) Add(ctx context.Context, in *AddReq, opts ...grpc.CallOption) (*AddResp, error) {
+	out := new(AddResp)
+	err := c.cc.Invoke(ctx, "/category.Category/Add", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *categoryClient) Del(ctx context.Context, in *DelReq, opts ...grpc.CallOption) (*DelResp, error) {
+	out := new(DelResp)
+	err := c.cc.Invoke(ctx, "/category.Category/Del", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CategoryServer is the server API for Category service.
 type CategoryServer interface {
 	GetList(context.Context, *Request) (*Response, error)
+	Add(context.Context, *AddReq) (*AddResp, error)
+	Del(context.Context, *DelReq) (*DelResp, error)
 }
 
 // UnimplementedCategoryServer can be embedded to have forward compatible implementations.
@@ -352,6 +670,12 @@ type UnimplementedCategoryServer struct {
 
 func (*UnimplementedCategoryServer) GetList(context.Context, *Request) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetList not implemented")
+}
+func (*UnimplementedCategoryServer) Add(context.Context, *AddReq) (*AddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
+}
+func (*UnimplementedCategoryServer) Del(context.Context, *DelReq) (*DelResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Del not implemented")
 }
 
 func RegisterCategoryServer(s *grpc.Server, srv CategoryServer) {
@@ -376,6 +700,42 @@ func _Category_GetList_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Category_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).Add(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/category.Category/Add",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).Add(ctx, req.(*AddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Category_Del_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DelReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CategoryServer).Del(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/category.Category/Del",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CategoryServer).Del(ctx, req.(*DelReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Category_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "category.Category",
 	HandlerType: (*CategoryServer)(nil),
@@ -383,6 +743,14 @@ var _Category_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetList",
 			Handler:    _Category_GetList_Handler,
+		},
+		{
+			MethodName: "Add",
+			Handler:    _Category_Add_Handler,
+		},
+		{
+			MethodName: "Del",
+			Handler:    _Category_Del_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

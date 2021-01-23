@@ -94,7 +94,8 @@ func (m *defaultIronCategoriesModel) Update(data IronCategories) error {
 }
 
 func (m *defaultIronCategoriesModel) Delete(id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+	//query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+	query := fmt.Sprintf("update %s set status = %d where `id` = ?", m.table, StatusDeleted)
 	_, err := m.conn.Exec(query, id)
 	return err
 }

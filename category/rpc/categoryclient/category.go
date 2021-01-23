@@ -14,12 +14,18 @@ import (
 )
 
 type (
-	CategoryItem = category.CategoryItem
+	DelReq       = category.DelReq
+	DelResp      = category.DelResp
 	Request      = category.Request
 	Response     = category.Response
+	CategoryItem = category.CategoryItem
+	AddReq       = category.AddReq
+	AddResp      = category.AddResp
 
 	Category interface {
 		GetList(ctx context.Context, in *Request) (*Response, error)
+		Add(ctx context.Context, in *AddReq) (*AddResp, error)
+		Del(ctx context.Context, in *DelReq) (*DelResp, error)
 	}
 
 	defaultCategory struct {
@@ -36,4 +42,14 @@ func NewCategory(cli zrpc.Client) Category {
 func (m *defaultCategory) GetList(ctx context.Context, in *Request) (*Response, error) {
 	client := category.NewCategoryClient(m.cli.Conn())
 	return client.GetList(ctx, in)
+}
+
+func (m *defaultCategory) Add(ctx context.Context, in *AddReq) (*AddResp, error) {
+	client := category.NewCategoryClient(m.cli.Conn())
+	return client.Add(ctx, in)
+}
+
+func (m *defaultCategory) Del(ctx context.Context, in *DelReq) (*DelResp, error) {
+	client := category.NewCategoryClient(m.cli.Conn())
+	return client.Del(ctx, in)
 }

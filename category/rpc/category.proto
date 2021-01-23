@@ -13,10 +13,33 @@ message Response {
 }
 
 message CategoryItem {
-    int32 id = 1;
-    string name = 2;
+  int32 id = 1;
+  string name = 2;
 }
+
+message AddReq {
+  int64 uid = 1;          // 创建人uid
+  string catName = 2;     // 种类名称
+  int64 parentId = 3;     // 父类id
+  string description = 4; // 描述
+}
+
+message AddResp {
+  int64 catId = 1;  // 种类id
+}
+
+message DelReq {
+  int64 uid = 1;          // 创建人uid
+  int64 catId = 2;        // 类别id
+}
+
+message DelResp {
+  int32 done = 1;       // 是否成功, 0:否, 1:是 2:保留
+}
+
 
 service Category {
   rpc GetList(Request) returns(Response);
+  rpc Add(AddReq) returns(AddResp);
+  rpc Del(DelReq) returns(DelResp);
 }
