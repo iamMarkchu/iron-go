@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package movement;
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+message AddReq {
+  int32 CId = 1;  // 类别id
+  string MName = 2; // 训练动作名字
+  string Description = 3;  // 描述
+}
+
+message AddResp {
+  int32 MId = 1; // 训练动作id
+}
+
+message GetListReq {
+  int32 CId = 1; // 类别Id
+}
+
+message GetListResp {
+  repeated ListItem data = 1;
+}
+
+message ListItem {
+  int64 Id = 1; //
+  int32 CId = 2;  // 类别id
+  string MName = 3; // 训练动作名字
+  string Description = 4;  // 描述
+  int64 UpdatedAt = 5; // 最后更新时间
+  int64 CreatedAt = 6; // 创建时间
+}
+
+service Movement {
+  rpc Ping(Request) returns(Response);
+  rpc Add(AddReq) returns(AddResp);  // 创建训练动作
+  rpc GetList(GetListReq) returns(GetListResp);  // 获取训练动作
+}

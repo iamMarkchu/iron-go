@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package plan;
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+// 创建训练计划
+message CreateReq {
+  string PlanName = 1;
+  repeated PlanDetail PlanDetails = 2;
+  uint64 Uid = 3;
+}
+message PlanDetail {
+  uint64 MovementId = 1; // 动作
+  uint32 Weight = 2; // 重量
+  uint32 Count = 3;  // 数量
+  uint32 Break = 4; // 间歇
+}
+message CreateResp {
+  uint64 PlanId = 1;
+}
+
+service Plan {
+  rpc Ping(Request) returns(Response);
+  rpc Create(CreateReq) returns(CreateResp);
+}

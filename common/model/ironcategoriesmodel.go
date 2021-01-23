@@ -27,6 +27,7 @@ type (
 		Update(data IronCategories) error
 		Delete(id int64) error
 		GetAll() ([]*IronCategories, error)
+		GetTopList() ([]*IronCategories, error)
 	}
 
 	defaultIronCategoriesModel struct {
@@ -102,8 +103,22 @@ func (m *defaultIronCategoriesModel) Delete(id int64) error {
 
 func (m *defaultIronCategoriesModel) GetAll() ([]*IronCategories, error) {
 	var resp = make([]*IronCategories, 0)
-	query := fmt.Sprintf("select * from %s", m.table)
-	err := m.conn.QueryRows(&resp, query)
+	query := fmt.Sprintf("select %s from %s where status = ?", ironCategoriesRows, m.table)
+	err := m.conn.QueryRows(&resp, query, StatusOk)
+	switch err {
+	case nil:
+		return resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
+}
+
+func (m *defaultIronCategoriesModel) GetTopList() ([]*IronCategories, error) {
+	var resp = make([]*IronCategories, 0)
+	query := fmt.Sprintf("select %s from %s where parent_id = ? and status = ?", ironCategoriesRows, m.table)
+	err := m.conn.QueryRows(&resp, query, 0, StatusOk)
 	switch err {
 	case nil:
 		return resp, nil

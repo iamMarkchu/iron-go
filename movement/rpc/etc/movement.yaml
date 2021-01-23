@@ -1,0 +1,13 @@
+Name: movement.rpc
+ListenOn: 127.0.0.1:8081
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: movement.rpc
+Mysql:
+  DataSource: root:root@tcp(127.0.0.1:3306)/iron_base?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+ZrpcCategory:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: category.rpc

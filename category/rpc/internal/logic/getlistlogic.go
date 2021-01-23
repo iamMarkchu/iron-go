@@ -2,8 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
-
 	"iron-go/category/rpc/category"
 	"iron-go/category/rpc/internal/svc"
 
@@ -26,9 +24,8 @@ func NewGetListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetListLo
 
 func (l *GetListLogic) GetList(in *category.Request) (*category.Response, error) {
 	list, err := l.svcCtx.CategoryModel.GetAll()
-	fmt.Println(list)
 	if err != nil {
-		logx.Error("GetList Error", "error", err)
+		l.Logger.Error("GetList Error", "error", err)
 	}
 	var res = make([]*category.CategoryItem, 0)
 	for _, item := range list {

@@ -15,6 +15,7 @@ message Response {
 message CategoryItem {
   int32 id = 1;
   string name = 2;
+  int32 status = 3;
 }
 
 message AddReq {
@@ -37,9 +38,29 @@ message DelResp {
   int32 done = 1;       // 是否成功, 0:否, 1:是 2:保留
 }
 
+// 获取顶级类别
+message GetTopListReq {
+
+}
+
+message GetTopListResp {
+  int32 code = 1;
+  string message = 2;
+  repeated CategoryItem data = 3; //类别列表
+}
+
+message GetCategoryByIdReq {
+  int32 catId = 1; // 类别id
+}
+
+message GetCategoryByIdResp {
+  CategoryItem data = 1; // 类别信息
+}
 
 service Category {
   rpc GetList(Request) returns(Response);
   rpc Add(AddReq) returns(AddResp);
   rpc Del(DelReq) returns(DelResp);
+  rpc GetTopList(GetTopListReq) returns(GetTopListResp);
+  rpc GetCategoryById(GetCategoryByIdReq) returns(GetCategoryByIdResp);
 }

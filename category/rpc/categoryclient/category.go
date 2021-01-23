@@ -14,18 +14,24 @@ import (
 )
 
 type (
-	DelReq       = category.DelReq
-	DelResp      = category.DelResp
-	Request      = category.Request
-	Response     = category.Response
-	CategoryItem = category.CategoryItem
-	AddReq       = category.AddReq
-	AddResp      = category.AddResp
+	GetCategoryByIdResp = category.GetCategoryByIdResp
+	AddReq              = category.AddReq
+	AddResp             = category.AddResp
+	DelReq              = category.DelReq
+	DelResp             = category.DelResp
+	GetTopListReq       = category.GetTopListReq
+	GetTopListResp      = category.GetTopListResp
+	Request             = category.Request
+	Response            = category.Response
+	CategoryItem        = category.CategoryItem
+	GetCategoryByIdReq  = category.GetCategoryByIdReq
 
 	Category interface {
 		GetList(ctx context.Context, in *Request) (*Response, error)
 		Add(ctx context.Context, in *AddReq) (*AddResp, error)
 		Del(ctx context.Context, in *DelReq) (*DelResp, error)
+		GetTopList(ctx context.Context, in *GetTopListReq) (*GetTopListResp, error)
+		GetCategoryById(ctx context.Context, in *GetCategoryByIdReq) (*GetCategoryByIdResp, error)
 	}
 
 	defaultCategory struct {
@@ -52,4 +58,14 @@ func (m *defaultCategory) Add(ctx context.Context, in *AddReq) (*AddResp, error)
 func (m *defaultCategory) Del(ctx context.Context, in *DelReq) (*DelResp, error) {
 	client := category.NewCategoryClient(m.cli.Conn())
 	return client.Del(ctx, in)
+}
+
+func (m *defaultCategory) GetTopList(ctx context.Context, in *GetTopListReq) (*GetTopListResp, error) {
+	client := category.NewCategoryClient(m.cli.Conn())
+	return client.GetTopList(ctx, in)
+}
+
+func (m *defaultCategory) GetCategoryById(ctx context.Context, in *GetCategoryByIdReq) (*GetCategoryByIdResp, error) {
+	client := category.NewCategoryClient(m.cli.Conn())
+	return client.GetCategoryById(ctx, in)
 }

@@ -35,3 +35,13 @@ func (s *CategoryServer) Del(ctx context.Context, in *category.DelReq) (*categor
 	l := logic.NewDelLogic(ctx, s.svcCtx)
 	return l.Del(in)
 }
+
+func (s *CategoryServer) GetTopList(ctx context.Context, in *category.GetTopListReq) (*category.GetTopListResp, error) {
+	l := logic.NewGetTopListLogic(ctx, s.svcCtx)
+	return l.GetTopList(in)
+}
+
+func (s *CategoryServer) GetCategoryById(ctx context.Context, in *category.GetCategoryByIdReq) (*category.GetCategoryByIdResp, error) {
+	l := logic.NewGetCategoryByIdLogic(ctx, s.svcCtx)
+	return l.GetCategoryById(in)
+}
