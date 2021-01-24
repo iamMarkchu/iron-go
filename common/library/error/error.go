@@ -26,4 +26,8 @@ var (
 	ErrCreate                 = errors.New("创建失败")
 	ErrUserNotExisit          = errors.New("用户不存在")
 	ErrUserStatusInvalidError = errors.New("用户状态非法")
+	ErrNoPlanId               = errors.New("请提供计划id")
+	ErrStartTime              = errors.New("开始时间必须大于现在")
+	ErrEndTime                = errors.New("结束时间必须大于现在")
+	ErrStartEnd               = errors.New("开始时间不得晚于结束时间")
 )

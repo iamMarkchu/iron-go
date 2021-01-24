@@ -1,0 +1,18 @@
+Name: training.rpc
+ListenOn: 127.0.0.1:8080
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: training.rpc
+Mysql:
+  DataSource: root:root@tcp(127.0.0.1:3306)/iron_base?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+ZrpcUser:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: user.rpc
+ZrpcPlan:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: user.rpc

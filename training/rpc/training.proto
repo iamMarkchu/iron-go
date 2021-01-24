@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package training;
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+// 创建训练
+message AddReq {
+  uint64 PlanId = 2;  // 计划id
+  uint64 StartTime = 3; // 开始时间
+  uint64 EndTime = 4;  // 结束时间
+  string Description = 5; // 描述
+  uint64 UId = 6; // uid
+}
+
+message AddResp {
+  uint64 TrainingId = 1;
+}
+
+message GetReq {
+  uint64 TrainingId = 1;
+  uint64 UId = 2;
+}
+message GetResp {
+  uint64 Id = 1;
+  uint64 PlanId = 2;
+  uint64 StartTime = 3; // 开始时间
+  uint64 EndTime = 4;  // 结束时间
+  string Description = 5; // 描述
+  uint32 Status = 6;
+  uint64 UId = 7;
+  repeated TrainingLogItem Logs = 8; // 训练详情
+}
+
+message TrainingLogItem {
+  uint64 PlanDetailId = 1;
+  uint32 Done = 2;
+}
+
+service Training {
+  rpc Ping(Request) returns(Response);
+  rpc Add(AddReq) returns(AddResp);
+  rpc Get(GetReq) returns(GetResp);
+}
