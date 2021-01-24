@@ -25,7 +25,7 @@ type (
 		FindOne(id int64) (*IronPlanDetails, error)
 		Update(data IronPlanDetails) error
 		Delete(id int64) error
-		BatchGetDetailsMap(pidS []int64) ([]*IronPlanDetails, error)
+		BatchGetDetailsMap(pidS []int64) (map[int64][]*IronPlanDetails, error)
 	}
 
 	defaultIronPlanDetailsModel struct {
@@ -86,8 +86,25 @@ func (m *defaultIronPlanDetailsModel) Delete(id int64) error {
 	return err
 }
 
-func (m *defaultIronPlanDetailsModel) BatchGetDetailsMap(pidS []int64) ([]*IronPlanDetails, error) {
-	//qs := make()
-	//query := fmt.Sprintf("select %s from %s where plan_id in (%s) and status = ?", ironPlanDetailsRows)
-	return nil, nil
+func (m *defaultIronPlanDetailsModel) BatchGetDetailsMap(pidS []int64) (map[int64][]*IronPlanDetails, error) {
+	res := make([]*IronPlanDetails, 0)
+	qs := strings.Repeat(",?", len(pidS))[1:]
+	query := fmt.Sprintf("select %s from %s where plan_id in (%s) and status = ?", ironPlanDetailsRows, m.table, qs)
+	params := make([]interface{}, 0)
+	for _, pp := range pidS {
+		params = append(params, pp)
+	}
+	params = append(params, StatusOk)
+	err := m.conn.QueryRows(&res, query, params...)
+	if err != nil {
+		return nil, err
+	}
+	ret := make(map[int64][]*IronPlanDetails)
+	for _, r := range res {
+		if _, ok := ret[r.PlanId]; !ok {
+			ret[r.PlanId] = make([]*IronPlanDetails, 0)
+		}
+		ret[r.PlanId] = append(ret[r.PlanId], r)
+	}
+	return ret, nil
 }
