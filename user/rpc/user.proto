@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package user;
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+// 注册
+message RegisterReq {
+  string UserName = 1;   // 用户名
+  string Password = 2;   // 密码
+  string RePassword = 3; // 重复密码
+  string Mobile = 4;  // 手机号
+}
+message RegistreResp {
+  uint64 UId = 1; // 用户id
+}
+// 登陆
+message LoginReq {
+  string UserName = 1;
+  string Password = 2;
+}
+
+message LoginResp {
+  uint64 UId = 1; // 用户id
+}
+// 获取用户信息
+message GetUserInfoReq {
+  uint64 UId = 1;
+}
+message GetUserInfoResp {
+  uint64 UId = 1;
+  string UserName = 2;
+  string NickName = 3;
+  string Mobile = 4;
+  uint32 Status = 5;
+  int64 CreatedAt = 6;
+  int64 UpdatedAt = 7;
+}
+
+
+service User {
+  rpc Ping(Request) returns(Response);
+  rpc Register(RegisterReq) returns(RegistreResp);
+  rpc Login(LoginReq) returns(LoginResp);
+  rpc GetUserInfo(GetUserInfoReq) returns(GetUserInfoResp);
+}

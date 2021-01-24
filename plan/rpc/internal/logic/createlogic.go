@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"iron-go/common/model"
+	"iron-go/user/rpc/user"
 	"strings"
 	"time"
 
@@ -38,6 +39,13 @@ func (l *CreateLogic) Create(in *plan.CreateReq) (*plan.CreateResp, error) {
 		return nil, errcode.ErrNoUid
 	}
 	//todo 获取用户信息
+	userInfo, err := l.svcCtx.UserRpcClient.GetUserInfo(l.ctx, &user.GetUserInfoReq{UId: in.GetUid()})
+	if err != nil {
+		return nil, errcode.ErrGrpcErr
+	}
+	if userInfo == nil {
+		return nil, errcode.ErrUserNotExisit
+	}
 	if len(in.GetPlanDetails()) == 0 {
 		return nil, errcode.ErrNoPlanDetails
 	}
