@@ -22,11 +22,29 @@ message PlanDetail {
   uint32 Count = 3;  // 数量
   uint32 Break = 4; // 间歇
 }
+message PlanDetailList {
+  uint64 Id = 1;  // 训练计划id
+  string PlanName = 2; // 名称
+  uint32 Status = 3; //状态
+  uint64 Uid = 4; // 用户id
+  int64 CreatedAt = 5; // 创建时间
+  int64 UpdatedAt = 6; // 更新时间
+  repeated PlanDetail PlanDetails = 7; // 计划列表
+}
 message CreateResp {
   uint64 PlanId = 1;
+}
+
+// 获取用户的训练计划
+message GetListReq {
+  uint64 Uid = 1;
+}
+message GetListResp {
+  repeated PlanDetailList PlanDetailList = 1;
 }
 
 service Plan {
   rpc Ping(Request) returns(Response);
   rpc Create(CreateReq) returns(CreateResp);
+  rpc GetList(GetListReq) returns(GetListResp);
 }

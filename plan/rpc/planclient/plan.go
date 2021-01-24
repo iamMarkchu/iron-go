@@ -14,15 +14,19 @@ import (
 )
 
 type (
-	CreateResp = plan.CreateResp
-	Request    = plan.Request
-	Response   = plan.Response
-	CreateReq  = plan.CreateReq
-	PlanDetail = plan.PlanDetail
+	PlanDetail     = plan.PlanDetail
+	PlanDetailList = plan.PlanDetailList
+	CreateResp     = plan.CreateResp
+	GetListReq     = plan.GetListReq
+	GetListResp    = plan.GetListResp
+	Request        = plan.Request
+	Response       = plan.Response
+	CreateReq      = plan.CreateReq
 
 	Plan interface {
 		Ping(ctx context.Context, in *Request) (*Response, error)
 		Create(ctx context.Context, in *CreateReq) (*CreateResp, error)
+		GetList(ctx context.Context, in *GetListReq) (*GetListResp, error)
 	}
 
 	defaultPlan struct {
@@ -44,4 +48,9 @@ func (m *defaultPlan) Ping(ctx context.Context, in *Request) (*Response, error) 
 func (m *defaultPlan) Create(ctx context.Context, in *CreateReq) (*CreateResp, error) {
 	client := plan.NewPlanClient(m.cli.Conn())
 	return client.Create(ctx, in)
+}
+
+func (m *defaultPlan) GetList(ctx context.Context, in *GetListReq) (*GetListResp, error) {
+	client := plan.NewPlanClient(m.cli.Conn())
+	return client.GetList(ctx, in)
 }

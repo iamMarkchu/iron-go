@@ -77,6 +77,9 @@ func (l *CreateLogic) Create(in *plan.CreateReq) (*plan.CreateResp, error) {
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
-	l.svcCtx.PlanModel.Create(data, details)
-	return &plan.CreateResp{}, nil
+	planId, err := l.svcCtx.PlanModel.Create(data, details)
+	if err != nil {
+		return nil, err
+	}
+	return &plan.CreateResp{PlanId: uint64(planId)}, nil
 }

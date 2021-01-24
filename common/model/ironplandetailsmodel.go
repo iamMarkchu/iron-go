@@ -25,6 +25,7 @@ type (
 		FindOne(id int64) (*IronPlanDetails, error)
 		Update(data IronPlanDetails) error
 		Delete(id int64) error
+		BatchGetDetailsMap(pidS []int64) ([]*IronPlanDetails, error)
 	}
 
 	defaultIronPlanDetailsModel struct {
@@ -83,4 +84,10 @@ func (m *defaultIronPlanDetailsModel) Delete(id int64) error {
 	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
 	_, err := m.conn.Exec(query, id)
 	return err
+}
+
+func (m *defaultIronPlanDetailsModel) BatchGetDetailsMap(pidS []int64) ([]*IronPlanDetails, error) {
+	//qs := make()
+	//query := fmt.Sprintf("select %s from %s where plan_id in (%s) and status = ?", ironPlanDetailsRows)
+	return nil, nil
 }

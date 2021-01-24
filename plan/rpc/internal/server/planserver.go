@@ -30,3 +30,8 @@ func (s *PlanServer) Create(ctx context.Context, in *plan.CreateReq) (*plan.Crea
 	l := logic.NewCreateLogic(ctx, s.svcCtx)
 	return l.Create(in)
 }
+
+func (s *PlanServer) GetList(ctx context.Context, in *plan.GetListReq) (*plan.GetListResp, error) {
+	l := logic.NewGetListLogic(ctx, s.svcCtx)
+	return l.GetList(in)
+}

@@ -258,6 +258,101 @@ func (x *PlanDetail) GetBreak() uint32 {
 	return 0
 }
 
+type PlanDetailList struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id          uint64        `protobuf:"varint,1,opt,name=Id,proto3" json:"Id,omitempty"`                  // 训练计划id
+	PlanName    string        `protobuf:"bytes,2,opt,name=PlanName,proto3" json:"PlanName,omitempty"`       // 名称
+	Status      uint32        `protobuf:"varint,3,opt,name=Status,proto3" json:"Status,omitempty"`          //状态
+	Uid         uint64        `protobuf:"varint,4,opt,name=Uid,proto3" json:"Uid,omitempty"`                // 用户id
+	CreatedAt   int64         `protobuf:"varint,5,opt,name=CreatedAt,proto3" json:"CreatedAt,omitempty"`    // 创建时间
+	UpdatedAt   int64         `protobuf:"varint,6,opt,name=UpdatedAt,proto3" json:"UpdatedAt,omitempty"`    // 更新时间
+	PlanDetails []*PlanDetail `protobuf:"bytes,7,rep,name=PlanDetails,proto3" json:"PlanDetails,omitempty"` // 计划列表
+}
+
+func (x *PlanDetailList) Reset() {
+	*x = PlanDetailList{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plan_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PlanDetailList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlanDetailList) ProtoMessage() {}
+
+func (x *PlanDetailList) ProtoReflect() protoreflect.Message {
+	mi := &file_plan_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlanDetailList.ProtoReflect.Descriptor instead.
+func (*PlanDetailList) Descriptor() ([]byte, []int) {
+	return file_plan_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PlanDetailList) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *PlanDetailList) GetPlanName() string {
+	if x != nil {
+		return x.PlanName
+	}
+	return ""
+}
+
+func (x *PlanDetailList) GetStatus() uint32 {
+	if x != nil {
+		return x.Status
+	}
+	return 0
+}
+
+func (x *PlanDetailList) GetUid() uint64 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *PlanDetailList) GetCreatedAt() int64 {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return 0
+}
+
+func (x *PlanDetailList) GetUpdatedAt() int64 {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return 0
+}
+
+func (x *PlanDetailList) GetPlanDetails() []*PlanDetail {
+	if x != nil {
+		return x.PlanDetails
+	}
+	return nil
+}
+
 type CreateResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -269,7 +364,7 @@ type CreateResp struct {
 func (x *CreateResp) Reset() {
 	*x = CreateResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_plan_proto_msgTypes[4]
+		mi := &file_plan_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -282,7 +377,7 @@ func (x *CreateResp) String() string {
 func (*CreateResp) ProtoMessage() {}
 
 func (x *CreateResp) ProtoReflect() protoreflect.Message {
-	mi := &file_plan_proto_msgTypes[4]
+	mi := &file_plan_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -295,7 +390,7 @@ func (x *CreateResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateResp.ProtoReflect.Descriptor instead.
 func (*CreateResp) Descriptor() ([]byte, []int) {
-	return file_plan_proto_rawDescGZIP(), []int{4}
+	return file_plan_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateResp) GetPlanId() uint64 {
@@ -303,6 +398,101 @@ func (x *CreateResp) GetPlanId() uint64 {
 		return x.PlanId
 	}
 	return 0
+}
+
+// 获取用户的训练计划
+type GetListReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Uid uint64 `protobuf:"varint,1,opt,name=Uid,proto3" json:"Uid,omitempty"`
+}
+
+func (x *GetListReq) Reset() {
+	*x = GetListReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plan_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetListReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetListReq) ProtoMessage() {}
+
+func (x *GetListReq) ProtoReflect() protoreflect.Message {
+	mi := &file_plan_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetListReq.ProtoReflect.Descriptor instead.
+func (*GetListReq) Descriptor() ([]byte, []int) {
+	return file_plan_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetListReq) GetUid() uint64 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+type GetListResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PlanDetailList []*PlanDetailList `protobuf:"bytes,1,rep,name=PlanDetailList,proto3" json:"PlanDetailList,omitempty"`
+}
+
+func (x *GetListResp) Reset() {
+	*x = GetListResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_plan_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetListResp) ProtoMessage() {}
+
+func (x *GetListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_plan_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetListResp.ProtoReflect.Descriptor instead.
+func (*GetListResp) Descriptor() ([]byte, []int) {
+	return file_plan_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetListResp) GetPlanDetailList() []*PlanDetailList {
+	if x != nil {
+		return x.PlanDetailList
+	}
+	return nil
 }
 
 var File_plan_proto protoreflect.FileDescriptor
@@ -327,15 +517,39 @@ var file_plan_proto_rawDesc = []byte{
 	0x57, 0x65, 0x69, 0x67, 0x68, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18,
 	0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x14, 0x0a, 0x05,
 	0x42, 0x72, 0x65, 0x61, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x42, 0x72, 0x65,
-	0x61, 0x6b, 0x22, 0x24, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x12, 0x16, 0x0a, 0x06, 0x50, 0x6c, 0x61, 0x6e, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x06, 0x50, 0x6c, 0x61, 0x6e, 0x49, 0x64, 0x32, 0x5a, 0x0a, 0x04, 0x50, 0x6c, 0x61, 0x6e,
-	0x12, 0x25, 0x0a, 0x04, 0x50, 0x69, 0x6e, 0x67, 0x12, 0x0d, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0e, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2b, 0x0a, 0x06, 0x43, 0x72, 0x65, 0x61, 0x74,
-	0x65, 0x12, 0x0f, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52,
-	0x65, 0x71, 0x1a, 0x10, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
-	0x52, 0x65, 0x73, 0x70, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x6b, 0x22, 0xd6, 0x01, 0x0a, 0x0e, 0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69,
+	0x6c, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x02, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x50, 0x6c, 0x61, 0x6e, 0x4e, 0x61, 0x6d,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x50, 0x6c, 0x61, 0x6e, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x16, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0d, 0x52, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x10, 0x0a, 0x03, 0x55, 0x69, 0x64,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x03, 0x55, 0x69, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x12, 0x32, 0x0a, 0x0b, 0x50, 0x6c, 0x61, 0x6e, 0x44,
+	0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x70,
+	0x6c, 0x61, 0x6e, 0x2e, 0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x0b,
+	0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x22, 0x24, 0x0a, 0x0a, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x16, 0x0a, 0x06, 0x50, 0x6c, 0x61,
+	0x6e, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x50, 0x6c, 0x61, 0x6e, 0x49,
+	0x64, 0x22, 0x1e, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x12,
+	0x10, 0x0a, 0x03, 0x55, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x03, 0x55, 0x69,
+	0x64, 0x22, 0x4b, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x3c, 0x0a, 0x0e, 0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x4c, 0x69,
+	0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e,
+	0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x0e,
+	0x50, 0x6c, 0x61, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x4c, 0x69, 0x73, 0x74, 0x32, 0x8a,
+	0x01, 0x0a, 0x04, 0x50, 0x6c, 0x61, 0x6e, 0x12, 0x25, 0x0a, 0x04, 0x50, 0x69, 0x6e, 0x67, 0x12,
+	0x0d, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0e,
+	0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2b,
+	0x0a, 0x06, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x12, 0x0f, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x10, 0x2e, 0x70, 0x6c, 0x61, 0x6e,
+	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2e, 0x0a, 0x07, 0x47,
+	0x65, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x10, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e, 0x47, 0x65,
+	0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x11, 0x2e, 0x70, 0x6c, 0x61, 0x6e, 0x2e,
+	0x47, 0x65, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -350,25 +564,32 @@ func file_plan_proto_rawDescGZIP() []byte {
 	return file_plan_proto_rawDescData
 }
 
-var file_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_plan_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_plan_proto_goTypes = []interface{}{
-	(*Request)(nil),    // 0: plan.Request
-	(*Response)(nil),   // 1: plan.Response
-	(*CreateReq)(nil),  // 2: plan.CreateReq
-	(*PlanDetail)(nil), // 3: plan.PlanDetail
-	(*CreateResp)(nil), // 4: plan.CreateResp
+	(*Request)(nil),        // 0: plan.Request
+	(*Response)(nil),       // 1: plan.Response
+	(*CreateReq)(nil),      // 2: plan.CreateReq
+	(*PlanDetail)(nil),     // 3: plan.PlanDetail
+	(*PlanDetailList)(nil), // 4: plan.PlanDetailList
+	(*CreateResp)(nil),     // 5: plan.CreateResp
+	(*GetListReq)(nil),     // 6: plan.GetListReq
+	(*GetListResp)(nil),    // 7: plan.GetListResp
 }
 var file_plan_proto_depIdxs = []int32{
 	3, // 0: plan.CreateReq.PlanDetails:type_name -> plan.PlanDetail
-	0, // 1: plan.Plan.Ping:input_type -> plan.Request
-	2, // 2: plan.Plan.Create:input_type -> plan.CreateReq
-	1, // 3: plan.Plan.Ping:output_type -> plan.Response
-	4, // 4: plan.Plan.Create:output_type -> plan.CreateResp
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	3, // 1: plan.PlanDetailList.PlanDetails:type_name -> plan.PlanDetail
+	4, // 2: plan.GetListResp.PlanDetailList:type_name -> plan.PlanDetailList
+	0, // 3: plan.Plan.Ping:input_type -> plan.Request
+	2, // 4: plan.Plan.Create:input_type -> plan.CreateReq
+	6, // 5: plan.Plan.GetList:input_type -> plan.GetListReq
+	1, // 6: plan.Plan.Ping:output_type -> plan.Response
+	5, // 7: plan.Plan.Create:output_type -> plan.CreateResp
+	7, // 8: plan.Plan.GetList:output_type -> plan.GetListResp
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_plan_proto_init() }
@@ -426,7 +647,43 @@ func file_plan_proto_init() {
 			}
 		}
 		file_plan_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PlanDetailList); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plan_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plan_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetListReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_plan_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetListResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -444,7 +701,7 @@ func file_plan_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_plan_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -472,6 +729,7 @@ const _ = grpc.SupportPackageIsVersion6
 type PlanClient interface {
 	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 	Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error)
+	GetList(ctx context.Context, in *GetListReq, opts ...grpc.CallOption) (*GetListResp, error)
 }
 
 type planClient struct {
@@ -500,10 +758,20 @@ func (c *planClient) Create(ctx context.Context, in *CreateReq, opts ...grpc.Cal
 	return out, nil
 }
 
+func (c *planClient) GetList(ctx context.Context, in *GetListReq, opts ...grpc.CallOption) (*GetListResp, error) {
+	out := new(GetListResp)
+	err := c.cc.Invoke(ctx, "/plan.Plan/GetList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PlanServer is the server API for Plan service.
 type PlanServer interface {
 	Ping(context.Context, *Request) (*Response, error)
 	Create(context.Context, *CreateReq) (*CreateResp, error)
+	GetList(context.Context, *GetListReq) (*GetListResp, error)
 }
 
 // UnimplementedPlanServer can be embedded to have forward compatible implementations.
@@ -515,6 +783,9 @@ func (*UnimplementedPlanServer) Ping(context.Context, *Request) (*Response, erro
 }
 func (*UnimplementedPlanServer) Create(context.Context, *CreateReq) (*CreateResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedPlanServer) GetList(context.Context, *GetListReq) (*GetListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetList not implemented")
 }
 
 func RegisterPlanServer(s *grpc.Server, srv PlanServer) {
@@ -557,6 +828,24 @@ func _Plan_Create_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Plan_GetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlanServer).GetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/plan.Plan/GetList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlanServer).GetList(ctx, req.(*GetListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Plan_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "plan.Plan",
 	HandlerType: (*PlanServer)(nil),
@@ -568,6 +857,10 @@ var _Plan_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Create",
 			Handler:    _Plan_Create_Handler,
+		},
+		{
+			MethodName: "GetList",
+			Handler:    _Plan_GetList_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

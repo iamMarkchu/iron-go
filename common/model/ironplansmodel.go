@@ -15,7 +15,7 @@ import (
 var (
 	ironPlansFieldNames          = builderx.RawFieldNames(&IronPlans{})
 	ironPlansRows                = strings.Join(ironPlansFieldNames, ",")
-	ironPlansRowsExpectAutoSet   = strings.Join(stringx.Remove(ironPlansFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
+	ironPlansRowsExpectAutoSet   = strings.Join(stringx.Remove(ironPlansFieldNames, "`id`", "`create_at`", "`update_time`"), ",")
 	ironPlansRowsWithPlaceHolder = strings.Join(stringx.Remove(ironPlansFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 )
 
@@ -25,12 +25,14 @@ type (
 		FindOne(id int64) (*IronPlans, error)
 		Update(data IronPlans) error
 		Delete(id int64) error
-		Create(data IronPlans, details []IronPlanDetails)
+		Create(data IronPlans, details []IronPlanDetails) (int64, error)
+		GetListByUid(uid uint64) ([]*IronPlans, error)
 	}
 
 	defaultIronPlansModel struct {
-		conn  sqlx.SqlConn
-		table string
+		conn     sqlx.SqlConn
+		table    string
+		subTable string
 	}
 
 	IronPlans struct {
@@ -45,8 +47,9 @@ type (
 
 func NewIronPlansModel(conn sqlx.SqlConn) IronPlansModel {
 	return &defaultIronPlansModel{
-		conn:  conn,
-		table: "`iron_plans`",
+		conn:     conn,
+		table:    "`iron_plans`",
+		subTable: "`iron_plan_details`",
 	}
 }
 
@@ -82,6 +85,40 @@ func (m *defaultIronPlansModel) Delete(id int64) error {
 	return err
 }
 
-func (m *defaultIronPlansModel) Create(data IronPlans, details []IronPlanDetails) {
+func (m *defaultIronPlansModel) Create(data IronPlans, details []IronPlanDetails) (int64, error) {
+	planId := int64(0)
+	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?)", m.table, ironPlansRowsExpectAutoSet)
+	query2 := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", m.subTable, ironPlanDetailsRowsExpectAutoSet)
+	err := m.conn.Transact(func(session sqlx.Session) error {
+		ret, err := session.Exec(query, data.PlanName, data.Status, data.UserId, data.CreatedAt, data.UpdatedAt)
+		if err != nil {
+			return err
+		}
+		planId, err = ret.LastInsertId()
+		if err != nil {
+			return err
+		}
+		for _, detail := range details {
+			ret, err = session.Exec(query2, planId, detail.MovementId, detail.Weight, detail.Count, detail.Break, StatusOk, detail.UserId, detail.CreatedAt, detail.UpdatedAt)
+			if err != nil {
+				return err
+			}
+		}
+		return nil
+	})
+	return planId, err
+}
 
+func (m *defaultIronPlansModel) GetListByUid(uid uint64) ([]*IronPlans, error) {
+	resp := make([]*IronPlans, 0)
+	query := fmt.Sprintf("select %s from %s where user_id = ? and status = ?", ironPlansRows, m.table)
+	err := m.conn.QueryRows(&resp, query, uid, StatusOk)
+	switch err {
+	case nil:
+		return resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
+	}
 }
